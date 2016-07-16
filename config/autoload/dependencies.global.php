@@ -20,5 +20,9 @@ return [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
         ],
+        // Use 'aliases'
+        'aliases' => [
+            'configuration' => 'config', //Doctrine needs a service called Configuration
+        ],
     ],
 ];
