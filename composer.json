@@ -35,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/App/"
+            "CodeEmailMKT\\": "src/CodeEmailMKT/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AppTest\\": "test/AppTest/"
+            "CodeEmailMKTTest\\": "test/CodeEmailMKTTest/"
         }
     },
     "scripts": {
