@@ -23,7 +23,7 @@
         "zendframework/zend-expressive-helpers": "^2.0",
         "zendframework/zend-stdlib": "~2.7.0",
         "zendframework/zend-expressive-aurarouter": "^1.0",
-        "zendframework/zend-servicemanager": "^2.7.3 || ^3.0",
+        "zendframework/zend-servicemanager": "~2.7.3",
         "ocramius/proxy-manager": "^1.0 || ^2.0",
         "zendframework/zend-expressive-twigrenderer": "^1.0",
         "doctrine/doctrine-orm-module": "^1.0"
@@ -35,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "CodeEmailMKT\\": "src/CodeEmailMKT/"
+            "App\\": "src/App/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CodeEmailMKTTest\\": "test/CodeEmailMKTTest/"
+            "AppTest\\": "test/AppTest/"
         }
     },
     "scripts": {
