@@ -41,7 +41,7 @@ return [
             ],
             'orm_default' => [
                 'drivers' => [
-                    'CodeEmailMKT\Entity' => 'CodeEmailMKT_driver'
+                    'CodeEmailMKT\Domain\Entity' => 'CodeEmailMKT_driver'
                 ]
             ]
         ],

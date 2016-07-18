@@ -1,5 +1,5 @@
 <?php
-namespace CodeEmailMKT\Entity;
+namespace CodeEmailMKT\Domain\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

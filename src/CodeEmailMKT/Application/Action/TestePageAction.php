@@ -1,9 +1,9 @@
 <?php
 
-namespace CodeEmailMKT\Action;
+namespace CodeEmailMKT\Application\Action;
 
-use CodeEmailMKT\Entity\ClienteEntity;
-use CodeEmailMKT\Entity\EnderecoEntity;
+use CodeEmailMKT\Domain\Entity\ClienteEntity;
+use CodeEmailMKT\Domain\Entity\EnderecoEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;

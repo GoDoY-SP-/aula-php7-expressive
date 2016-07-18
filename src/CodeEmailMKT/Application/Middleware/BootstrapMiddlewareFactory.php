@@ -1,15 +1,15 @@
 <?php
 
-namespace CodeEmailMKT\Action;
+namespace CodeEmailMKT\Application\Middleware;
 
 use CodeEmailMKT\Infrastructure\Bootstrap;
 use Interop\Container\ContainerInterface;
 
-class BootstrapActionFactory
+class BootstrapMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
         $bootstrap = new Bootstrap();
-        return new BootstrapAction($bootstrap);
+        return new BootstrapMiddleware($bootstrap);
     }
 }
