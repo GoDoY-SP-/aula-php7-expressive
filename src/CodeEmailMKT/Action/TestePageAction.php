@@ -9,12 +9,7 @@ use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\JsonResponse;
-use Zend\Expressive\Router;
 use Zend\Expressive\Template;
-use Zend\Expressive\Plates\PlatesRenderer;
-use Zend\Expressive\Twig\TwigRenderer;
-use Zend\Expressive\ZendView\ZendViewRenderer;
 
 class TestePageAction
 {
@@ -78,7 +73,9 @@ class TestePageAction
         $clientes = $this->entityManager->getRepository(ClienteEntity::class)->findAll();
 
         $data = [
-            'pageContent' => 'Minha primeira aplicação',
+            'headerTitle' => 'Aula PHP7',
+            'headerDescription' => 'Testes Doctrine',
+            'contentTitle' => 'Cadastro de Clientes',
             'clientes' => $clientes
         ];
 
