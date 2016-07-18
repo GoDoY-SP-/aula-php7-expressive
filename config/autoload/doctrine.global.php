@@ -33,10 +33,22 @@ return [
 //                'port' => '',
 //            ],
         ],
-        'annotations' => [
-            'paths' => [
-//                'App/src/Entity',
+        'driver' => [
+            'CodeEmailMKT_driver' => [
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => [__DIR__ . '/../../src/CodeEmailMKT/Entity']
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    'CodeEmailMKT\Entity' => 'CodeEmailMKT_driver'
+                ]
             ]
-        ]
+        ],
+//        'annotations' => [
+//            'paths' => [
+////                'App/src/Entity',
+//            ]
+//        ]
     ],
 ];
