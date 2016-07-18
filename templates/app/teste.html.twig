@@ -3,5 +3,43 @@
 {% block title %}Teste{% endblock %}
 
 {% block content %}
-    {{ pageContent }}
+    {{ pageContent }}<br>
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>CPF</th>
+            <th>Endereços</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if clientes %}
+            {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.cpf }}</td>
+                    <td>
+                        {% if cliente.enderecos %}
+                            <ul>
+                                {% for endereco in cliente.enderecos %}
+                                    <li>{{ endereco.logradouro }}, {{ endereco.cidade }}/{{ endereco.estado }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            Nenhum endereço
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5">Nenhum registro encotrado!</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
 {% endblock %}
