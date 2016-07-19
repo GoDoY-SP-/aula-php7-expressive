@@ -4,9 +4,11 @@ namespace CodeEmailMKT\Application\Action\Customer;
 
 use CodeEmailMKT\Domain\Entity\CustomerEntity;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
+use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Template;
 
 class CustomerCreateAction
@@ -49,6 +51,9 @@ class CustomerCreateAction
     ) {
         // Verificar se foi passado $_POST
         if ($request->getMethod() == 'POST') {
+            /** @var FlashMessageInterface $flashMessage */
+            $flashMessage = $request->getAttribute('flashMessage');
+
             // Carregar dados do formulário
             $data = $request->getParsedBody();
 
@@ -60,6 +65,12 @@ class CustomerCreateAction
 
             // Persistir
             $this->repository->create($entity);
+
+            // Setar mensagem de sucesso
+            $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro inserido com sucesso!');
+
+            // Redirecionar para listagem
+            return new RedirectResponse('/admin/customer');
         }
 
         $data = [

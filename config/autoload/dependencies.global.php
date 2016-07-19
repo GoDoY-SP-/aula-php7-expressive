@@ -19,7 +19,9 @@ return [
         'factories' => [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
+            Aura\Session\Session::class => DaMess\Factory\AuraSessionFactory::class,
             CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface::class => CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory::class,
+            CodeEmailMKT\Domain\Service\FlashMessageInterface::class => CodeEmailMKT\Infrastructure\Service\FlashMessageFactory::class,
         ],
         // Use 'aliases'
         'aliases' => [
