@@ -1,22 +1,13 @@
 <?php
 namespace CodeEmailMKT\Domain\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Endereço
- *
- * @ORM\Table(name="enderecos")
- * @ORM\Entity
  */
-class EnderecoEntity
+class AddressEntity
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="end_id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 

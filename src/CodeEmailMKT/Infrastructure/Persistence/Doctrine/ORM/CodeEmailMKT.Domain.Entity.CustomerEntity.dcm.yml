@@ -1,0 +1,31 @@
+#CodeEmailMKT.Domain.Entity.CustomerEntity.dcm.yml
+CodeEmailMKT\Domain\Entity\CustomerEntity:
+    type: entity
+    repositoryClass: CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepository
+    table: clientes
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: cli_id
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: cli_nome
+        email:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: cli_email
+    lifecycleCallbacks: {  }

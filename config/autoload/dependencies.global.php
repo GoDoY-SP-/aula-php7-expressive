@@ -19,6 +19,7 @@ return [
         'factories' => [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
+            CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface::class => CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory::class,
         ],
         // Use 'aliases'
         'aliases' => [
