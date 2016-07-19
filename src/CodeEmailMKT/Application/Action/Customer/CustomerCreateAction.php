@@ -9,7 +9,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 
-class CustomerListAction
+class CustomerCreateAction
 {
 
     /**
@@ -47,15 +47,27 @@ class CustomerListAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        // Carregar clientes para view
-        $costumers = $this->repository->findAll();
+        // Verificar se foi passado $_POST
+        if ($request->getMethod() == 'POST') {
+            // Carregar dados do formulário
+            $data = $request->getParsedBody();
+
+            // Hidratar entidade
+            $entity = new CustomerEntity();
+            $entity
+                ->setName($data['name'])
+                ->setEmail($data['email']);
+
+            // Persistir
+            $this->repository->create($entity);
+        }
 
         $data = [
             'headerTitle' => 'Contatos',
-            'headerDescription' => 'Listagem',
-            'clientes' => $costumers
+            'headerDescription' => 'Cadastro',
+            'contentTitle' => 'Novo Contato',
         ];
 
-        return new HtmlResponse($this->template->render('app::customer/list', $data));
+        return new HtmlResponse($this->template->render('app::customer/create', $data));
     }
 }

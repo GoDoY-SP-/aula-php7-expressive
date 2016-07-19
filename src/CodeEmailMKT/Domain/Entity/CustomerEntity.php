@@ -39,7 +39,7 @@ class CustomerEntity
 
     /**
      * @param string $name
-     * @return ClienteEntity
+     * @return CustomerEntity
      */
     public function setName($name)
     {
@@ -57,7 +57,7 @@ class CustomerEntity
 
     /**
      * @param string $email
-     * @return ClienteEntity
+     * @return CustomerEntity
      */
     public function setEmail($email)
     {
