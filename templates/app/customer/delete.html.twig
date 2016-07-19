@@ -1,0 +1,47 @@
+{% extends '@layout/adminLTE.html.twig' %}
+
+{% block title %}SoN PHP7+DDD{% endblock %}
+{% block page_header %}{{ headerTitle }}{% endblock %}
+{% block page_header_description %}{{ headerDescription }}{% endblock %}
+
+{% block content %}
+    <!-- Default box -->
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <h4 class="box-title">{{ contentTitle }}</h4>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <!-- form start -->
+            <form name="form_disabled" role="form">
+                <fieldset disabled>
+                    <input type="hidden" class="form-control" name="_method" value="PUT">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="name">Nome</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Digite o nome" value="{{ customer.name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Digite o email" value="{{ customer.email }}">
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </fieldset>
+            </form>
+
+            <form name="form" role="form" method="post" action="{{ url('customer.delete', {id: customer.id}) }}">
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.box -->
+
+    <div class="pull-right">
+        <a class="btn btn-done" href="{{ url('customer.list') }}">
+            <i class="fa fa-arrow-left"></i> Voltar
+        </a>
+    </div>
+{% endblock %}

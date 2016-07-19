@@ -11,6 +11,8 @@ return [
             CodeEmailMKT\Application\Action\TestePageAction::class => CodeEmailMKT\Application\Action\TestePageFactory::class,
             CodeEmailMKT\Application\Action\Customer\CustomerListAction::class => CodeEmailMKT\Application\Action\Customer\Factory\CustomerListFactory::class,
             CodeEmailMKT\Application\Action\Customer\CustomerCreateAction::class => CodeEmailMKT\Application\Action\Customer\Factory\CustomerCreateFactory::class,
+            CodeEmailMKT\Application\Action\Customer\CustomerUpdateAction::class => CodeEmailMKT\Application\Action\Customer\Factory\CustomerUpdateFactory::class,
+            CodeEmailMKT\Application\Action\Customer\CustomerDeleteAction::class => CodeEmailMKT\Application\Action\Customer\Factory\CustomerDeleteFactory::class,
         ],
     ],
 
@@ -35,7 +37,7 @@ return [
         ],
         [
             'name' => 'customer.list',
-            'path' => '/admin/customer',
+            'path' => '/admin/customers',
             'middleware' => CodeEmailMKT\Application\Action\Customer\CustomerListAction::class,
             'allowed_methods' => ['GET'],
         ],
@@ -44,6 +46,28 @@ return [
             'path' => '/admin/customer/create',
             'middleware' => CodeEmailMKT\Application\Action\Customer\CustomerCreateAction::class,
             'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'customer.update',
+            'path' => '/admin/customer/update/{id}',
+            'middleware' => CodeEmailMKT\Application\Action\Customer\CustomerUpdateAction::class,
+            'allowed_methods' => ['GET', 'POST'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
+        ],
+        [
+            'name' => 'customer.delete',
+            'path' => '/admin/customer/delete/{id}',
+            'middleware' => CodeEmailMKT\Application\Action\Customer\CustomerDeleteAction::class,
+            'allowed_methods' => ['GET', 'POST'],
+            'options' => [
+                'tokens' => [
+                    'id' => '\d+'
+                ]
+            ]
         ],
     ],
 ];

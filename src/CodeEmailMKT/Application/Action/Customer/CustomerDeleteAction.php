@@ -2,7 +2,6 @@
 
 namespace CodeEmailMKT\Application\Action\Customer;
 
-use CodeEmailMKT\Domain\Entity\CustomerEntity;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -11,7 +10,7 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Template;
 
-class CustomerCreateAction
+class CustomerDeleteAction
 {
 
     /**
@@ -49,25 +48,20 @@ class CustomerCreateAction
         ResponseInterface $response,
         callable $next = null
     ) {
+        // Carregar entidade
+        $id = $request->getAttribute('id');
+        $customer = $this->repository->find($id);
+
         // Verificar se foi passado $_POST
         if ($request->getMethod() == 'POST') {
             /** @var FlashMessageInterface $flashMessage */
             $flashMessage = $request->getAttribute('flashMessage');
 
-            // Carregar dados do formulário
-            $data = $request->getParsedBody();
-
-            // Hidratar entidade
-            $entity = new CustomerEntity();
-            $entity
-                ->setName($data['name'])
-                ->setEmail($data['email']);
-
-            // Persistir
-            $this->repository->create($entity);
+            // Apagar
+            $this->repository->remove($customer);
 
             // Setar mensagem de sucesso
-            $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro inserido com sucesso!');
+            $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro apagado com sucesso!');
 
             // Redirecionar para listagem
             return new RedirectResponse('/admin/customers');
@@ -75,10 +69,11 @@ class CustomerCreateAction
 
         $data = [
             'headerTitle' => 'Contatos',
-            'headerDescription' => 'Cadastro',
-            'contentTitle' => 'Novo Contato',
+            'headerDescription' => 'Exclusão',
+            'contentTitle' => 'Apagar Contato',
+            'customer' => $customer,
         ];
 
-        return new HtmlResponse($this->template->render('app::customer/create', $data));
+        return new HtmlResponse($this->template->render('app::customer/delete', $data));
     }
 }

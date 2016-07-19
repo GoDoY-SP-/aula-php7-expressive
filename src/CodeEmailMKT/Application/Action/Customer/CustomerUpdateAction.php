@@ -11,7 +11,7 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Template;
 
-class CustomerCreateAction
+class CustomerUpdateAction
 {
 
     /**
@@ -49,6 +49,10 @@ class CustomerCreateAction
         ResponseInterface $response,
         callable $next = null
     ) {
+        // Carregar entidade
+        $id = $request->getAttribute('id');
+        $customer = $this->repository->find($id);
+
         // Verificar se foi passado $_POST
         if ($request->getMethod() == 'POST') {
             /** @var FlashMessageInterface $flashMessage */
@@ -57,17 +61,16 @@ class CustomerCreateAction
             // Carregar dados do formulário
             $data = $request->getParsedBody();
 
-            // Hidratar entidade
-            $entity = new CustomerEntity();
-            $entity
+            // Hidratar novos dados na entidade
+            $customer
                 ->setName($data['name'])
                 ->setEmail($data['email']);
 
             // Persistir
-            $this->repository->create($entity);
+            $this->repository->update($customer);
 
             // Setar mensagem de sucesso
-            $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro inserido com sucesso!');
+            $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro atualizado com sucesso!');
 
             // Redirecionar para listagem
             return new RedirectResponse('/admin/customers');
@@ -76,9 +79,10 @@ class CustomerCreateAction
         $data = [
             'headerTitle' => 'Contatos',
             'headerDescription' => 'Cadastro',
-            'contentTitle' => 'Novo Contato',
+            'contentTitle' => 'Editar Contato',
+            'customer' => $customer,
         ];
 
-        return new HtmlResponse($this->template->render('app::customer/create', $data));
+        return new HtmlResponse($this->template->render('app::customer/update', $data));
     }
 }

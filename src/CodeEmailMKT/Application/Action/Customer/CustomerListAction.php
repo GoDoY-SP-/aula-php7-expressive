@@ -58,7 +58,7 @@ class CustomerListAction
             'flashMessages' => $flashMessages,
             'headerTitle' => 'Contatos',
             'headerDescription' => 'Listagem',
-            'clientes' => $costumers
+            'customers' => $costumers
         ];
 
         return new HtmlResponse($this->template->render('app::customer/list', $data));

@@ -20,15 +20,20 @@
                     <th>ID</th>
                     <th>Nome</th>
                     <th>E-mail</th>
+                    <th>Ação</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% if clientes %}
-                    {% for cliente in clientes %}
+                {% if customers %}
+                    {% for customer in customers %}
                         <tr>
-                            <td>{{ cliente.id }}</td>
-                            <td>{{ cliente.name }}</td>
-                            <td>{{ cliente.email }}</td>
+                            <td>{{ customer.id }}</td>
+                            <td>{{ customer.name }}</td>
+                            <td>{{ customer.email }}</td>
+                            <td>
+                                <a href="{{ url('customer.update', {id: customer.id}) }}" class="btn btn-xs"><i class="icon fa fa-edit"></i> Editar</a>
+                                <a href="{{ url('customer.delete', {id: customer.id}) }}" class="btn btn-xs text-danger"><i class="icon fa fa-times"></i> Excluir</a>
+                            </td>
                         </tr>
                     {% endfor %}
                 {% else %}
