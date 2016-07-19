@@ -15,7 +15,6 @@
             <!-- form start -->
             <form name="form_disabled" role="form">
                 <fieldset disabled>
-                    <input type="hidden" class="form-control" name="_method" value="PUT">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="name">Nome</label>
@@ -31,6 +30,7 @@
             </form>
 
             <form name="form" role="form" method="post" action="{{ url('customer.delete', {id: customer.id}) }}">
+                <input type="hidden" class="form-control" name="_method" value="DELETE">
                 <div class="box-footer">
                     <button type="submit" class="btn btn-danger">Excluir</button>
                 </div>

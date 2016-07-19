@@ -53,8 +53,8 @@ class CustomerUpdateAction
         $id = $request->getAttribute('id');
         $customer = $this->repository->find($id);
 
-        // Verificar se foi passado $_POST
-        if ($request->getMethod() == 'POST') {
+        // Verificar se foi passado PUT (spoof)
+        if ($request->getMethod() == 'PUT') {
             /** @var FlashMessageInterface $flashMessage */
             $flashMessage = $request->getAttribute('flashMessage');
 

@@ -52,8 +52,8 @@ class CustomerDeleteAction
         $id = $request->getAttribute('id');
         $customer = $this->repository->find($id);
 
-        // Verificar se foi passado $_POST
-        if ($request->getMethod() == 'POST') {
+        // Verificar se foi passado DELETE (spoof)
+        if ($request->getMethod() == 'DELETE') {
             /** @var FlashMessageInterface $flashMessage */
             $flashMessage = $request->getAttribute('flashMessage');
 
