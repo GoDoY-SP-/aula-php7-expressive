@@ -8,6 +8,7 @@ return [
             Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
             Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
             CodeEmailMKT\Application\Middleware\BootstrapMiddleware::class => CodeEmailMKT\Application\Middleware\BootstrapMiddlewareFactory::class,
+            CodeEmailMKT\Application\Middleware\TwigMiddleware::class => CodeEmailMKT\Application\Middleware\TwigMiddlewareFactory::class,
         ],
     ],
     // This can be used to seed pre- and/or post-routing middleware
@@ -42,6 +43,7 @@ return [
                 // - modifications to outgoing responses
                 Helper\ServerUrlMiddleware::class,
                 CodeEmailMKT\Application\Middleware\BootstrapMiddleware::class,
+                CodeEmailMKT\Application\Middleware\TwigMiddleware::class,
             ],
             'priority' => 10000,
         ],
