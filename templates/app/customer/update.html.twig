@@ -5,6 +5,7 @@
 {% block page_header_description %}{{ headerDescription }}{% endblock %}
 
 {% block content %}
+
     <!-- Default box -->
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -12,25 +13,8 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <!-- form start -->
-            <form name="form" role="form" method="post" action="{{ url('customer.update', {id: customer.id}) }}">
-                <input type="hidden" class="form-control" name="_method" value="PUT">
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="name">Nome</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Digite o nome" value="{{ customer.name }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Digite o email" value="{{ customer.email }}">
-                    </div>
-                </div>
-                <!-- /.box-body -->
-
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Alterar</button>
-                </div>
-            </form>
+            {% include '@app/customer/_form-data.html.twig' with {myForm: myForm, actionForm: url('customer.update', {id: customer.id}), labelSumit: 'Alterar', classSumit: 'btn btn-primary'} %}
+            <!-- /.form -->
         </div>
     </div>
     <!-- /.box -->

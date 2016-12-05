@@ -2,6 +2,8 @@
 
 namespace CodeEmailMKT\Application\Action\Customer;
 
+use CodeEmailMKT\Application\Form\CustomerForm;
+use CodeEmailMKT\Application\Form\HttpMethodElement;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -52,6 +54,11 @@ class CustomerDeleteAction
         $id = $request->getAttribute('id');
         $customer = $this->repository->find($id);
 
+        // Form
+        $form = new CustomerForm();
+        $form->add(new HttpMethodElement('DELETE'));
+        $form->bind($customer);
+
         // Verificar se foi passado DELETE (spoof)
         if ($request->getMethod() == 'DELETE') {
             /** @var FlashMessageInterface $flashMessage */
@@ -72,6 +79,7 @@ class CustomerDeleteAction
             'headerDescription' => 'Exclusão',
             'contentTitle' => 'Apagar Contato',
             'customer' => $customer,
+            'myForm' => $form,
         ];
 
         return new HtmlResponse($this->template->render('app::customer/delete', $data));

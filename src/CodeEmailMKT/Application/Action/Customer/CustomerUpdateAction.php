@@ -2,6 +2,8 @@
 
 namespace CodeEmailMKT\Application\Action\Customer;
 
+use CodeEmailMKT\Application\Form\CustomerForm;
+use CodeEmailMKT\Application\Form\HttpMethodElement;
 use CodeEmailMKT\Domain\Entity\CustomerEntity;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
@@ -53,6 +55,11 @@ class CustomerUpdateAction
         $id = $request->getAttribute('id');
         $customer = $this->repository->find($id);
 
+        // Form
+        $form = new CustomerForm();
+        $form->add(new HttpMethodElement('PUT'));
+        $form->bind($customer);
+
         // Verificar se foi passado PUT (spoof)
         if ($request->getMethod() == 'PUT') {
             /** @var FlashMessageInterface $flashMessage */
@@ -76,11 +83,39 @@ class CustomerUpdateAction
             return new RedirectResponse('/admin/customers');
         }
 
+        // Verificar se foi passado PUT (spoof)
+        if ($request->getMethod() == 'PUT') {
+            /** @var FlashMessageInterface $flashMessage */
+            $flashMessage = $request->getAttribute('flashMessage');
+
+            // Carregar dados do formulário
+            $data = $request->getParsedBody();
+
+            // Setar dados no formulário
+            $form->setData($data);
+
+            // Validar formulário
+            if ($form->isValid()) {
+                // Hidratar entidade
+                $entity = $form->getData();
+
+                // Persistir
+                $this->repository->update($entity);
+
+                // Setar mensagem de sucesso
+                $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro atualizado com sucesso!');
+
+                // Redirecionar para listagem
+                return new RedirectResponse('/admin/customers');
+            }
+        }
+
         $data = [
             'headerTitle' => 'Contatos',
             'headerDescription' => 'Cadastro',
             'contentTitle' => 'Editar Contato',
             'customer' => $customer,
+            'myForm' => $form,
         ];
 
         return new HtmlResponse($this->template->render('app::customer/update', $data));

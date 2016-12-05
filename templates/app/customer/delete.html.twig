@@ -11,30 +11,11 @@
             <h4 class="box-title">{{ contentTitle }}</h4>
         </div>
         <!-- /.box-header -->
-        <div class="box-body">
-            <!-- form start -->
-            <form name="form_disabled" role="form">
-                <fieldset disabled>
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label for="name">Nome</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Digite o nome" value="{{ customer.name }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Digite o email" value="{{ customer.email }}">
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                </fieldset>
-            </form>
 
-            <form name="form" role="form" method="post" action="{{ url('customer.delete', {id: customer.id}) }}">
-                <input type="hidden" class="form-control" name="_method" value="DELETE">
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-danger">Excluir</button>
-                </div>
-            </form>
+        <div class="box-body">
+            <!-- form -->
+            {% include '@app/customer/_form-data-delete.html.twig' with {myForm: myForm, actionForm: url('customer.delete', {id: customer.id}), labelSumit: 'Excluir', classSumit: 'btn btn-danger'} %}
+            <!-- /.form -->
         </div>
     </div>
     <!-- /.box -->

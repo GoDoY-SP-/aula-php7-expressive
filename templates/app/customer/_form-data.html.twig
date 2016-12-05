@@ -1,0 +1,15 @@
+<!-- form elements -->
+{% include '@app/customer/_form-elements.html.twig' with {myForm: myForm, actionForm: actionForm, labelSumit: labelSumit, classSumit: classSumit} %}
+<!-- /.form  elements -->
+
+<!-- form start -->
+{{ form().openTag(myForm) | raw }}
+{{ formHidden( myForm.get('_method') ) }}
+<fieldset class="col-xs-12">
+    {% include '@app/customer/_form-body.html.twig' with {myForm: myForm} %}
+    <!-- /.form body -->
+</fieldset>
+
+{% include '@app/customer/_form-footer.html.twig' with {myForm: myForm} %}
+<!-- /.form footer -->
+{{ form().closeTag() | raw }}

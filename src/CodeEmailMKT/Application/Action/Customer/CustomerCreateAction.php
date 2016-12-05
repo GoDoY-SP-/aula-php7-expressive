@@ -2,6 +2,8 @@
 
 namespace CodeEmailMKT\Application\Action\Customer;
 
+use CodeEmailMKT\Application\Form\CustomerForm;
+use CodeEmailMKT\Application\Form\HttpMethodElement;
 use CodeEmailMKT\Domain\Entity\CustomerEntity;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
@@ -49,6 +51,10 @@ class CustomerCreateAction
         ResponseInterface $response,
         callable $next = null
     ) {
+        // Form
+        $form = new CustomerForm();
+        $form->add(new HttpMethodElement('POST'));
+
         // Verificar se foi passado $_POST
         if ($request->getMethod() == 'POST') {
             /** @var FlashMessageInterface $flashMessage */
@@ -57,26 +63,30 @@ class CustomerCreateAction
             // Carregar dados do formulário
             $data = $request->getParsedBody();
 
-            // Hidratar entidade
-            $entity = new CustomerEntity();
-            $entity
-                ->setName($data['name'])
-                ->setEmail($data['email']);
+            // Setar dados no formulário
+            $form->setData($data);
 
-            // Persistir
-            $this->repository->create($entity);
+            // Validar formulário
+            if ($form->isValid()) {
+                // Hidratar entidade
+                $entity = $form->getData();
 
-            // Setar mensagem de sucesso
-            $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro inserido com sucesso!');
+                // Persistir
+                $this->repository->create($entity);
 
-            // Redirecionar para listagem
-            return new RedirectResponse('/admin/customers');
+                // Setar mensagem de sucesso
+                $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro inserido com sucesso!');
+
+                // Redirecionar para listagem
+                return new RedirectResponse('/admin/customers');
+            }
         }
 
         $data = [
             'headerTitle' => 'Contatos',
             'headerDescription' => 'Cadastro',
             'contentTitle' => 'Novo Contato',
+            'myForm' => $form,
         ];
 
         return new HtmlResponse($this->template->render('app::customer/create', $data));
