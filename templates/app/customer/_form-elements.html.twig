@@ -1,0 +1,15 @@
+{% do myForm.setAttribute('action', actionForm) %}
+{% do myForm.setAttribute('class', 'form-horizontal') %}
+{% do myForm.setAttribute('role', 'form') %}
+
+{% set formName = myForm.get('name') %}
+{% do formName.setAttribute('class', 'form-control') %}
+{% do formName.setAttribute('placeholder', 'Digite o nome') %}
+
+{% set formEmail = myForm.get('email') %}
+{% do formEmail.setAttribute('class', 'form-control') %}
+{% do formEmail.setAttribute('placeholder', 'Digite o e-mail') %}
+
+{% set formSubmit = myForm.get('submit') %}
+{% do formSubmit.setAttribute('class', classSumit) %}
+{% do formSubmit.setLabel(labelSumit) %}
