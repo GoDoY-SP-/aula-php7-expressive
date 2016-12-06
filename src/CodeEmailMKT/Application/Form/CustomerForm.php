@@ -12,12 +12,6 @@ class CustomerForm extends Form
     public function __construct($name = 'customer', array $options = [])
     {
         parent::__construct($name, $options);
-        // Hydrator
-        $this->setHydrator(new ClassMethods());
-        $this->setObject(new CustomerEntity());
-
-        // InputFilter
-        $this->setInputFilter(new CustomerInputFilter());
 
         // Elementos
         $this->add([

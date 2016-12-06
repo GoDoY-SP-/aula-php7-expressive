@@ -13,7 +13,9 @@ class CustomerDeleteFactory
     {
         $repository = $container->get(CustomerRepositoryInterface::class);
         $template = $container->get(TemplateRendererInterface::class);
+        $form = $container->get(CustomerForm::class);
 
-        return new CustomerDeleteAction($repository, $template);
+
+        return new CustomerDeleteAction($repository, $template, $form);
     }
 }

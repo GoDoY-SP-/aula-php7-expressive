@@ -4,7 +4,6 @@ namespace CodeEmailMKT\Application\Action\Customer;
 
 use CodeEmailMKT\Application\Form\CustomerForm;
 use CodeEmailMKT\Application\Form\HttpMethodElement;
-use CodeEmailMKT\Domain\Entity\CustomerEntity;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
 use CodeEmailMKT\Domain\Service\FlashMessageInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -20,10 +19,16 @@ class CustomerUpdateAction
      * @var CustomerRepositoryInterface
      */
     private $repository;
+
     /**
      * @var null|Template\TemplateRendererInterface
      */
     private $template;
+
+    /**
+     * @var CustomerForm
+     */
+    private $form;
 
 
     /**
@@ -33,10 +38,12 @@ class CustomerUpdateAction
      */
     public function __construct(
         CustomerRepositoryInterface $repository,
-        Template\TemplateRendererInterface $template = null
+        Template\TemplateRendererInterface $template = null,
+        CustomerForm $form = null
     ) {
         $this->repository = $repository;
         $this->template = $template;
+        $this->form = $form;
     }
 
     /**
@@ -55,10 +62,11 @@ class CustomerUpdateAction
         $id = $request->getAttribute('id');
         $customer = $this->repository->find($id);
 
-        // Form
-        $form = new CustomerForm();
-        $form->add(new HttpMethodElement('PUT'));
-        $form->bind($customer);
+        // Method Spof
+        $this->form->add(new HttpMethodElement('PUT'));
+
+        // Setando dados
+        $this->form->bind($customer);
 
         // Verificar se foi passado PUT (spoof)
         if ($request->getMethod() == 'PUT') {
@@ -92,12 +100,12 @@ class CustomerUpdateAction
             $data = $request->getParsedBody();
 
             // Setar dados no formulário
-            $form->setData($data);
+            $this->form->setData($data);
 
             // Validar formulário
-            if ($form->isValid()) {
+            if ($this->form->isValid()) {
                 // Hidratar entidade
-                $entity = $form->getData();
+                $entity = $this->form->getData();
 
                 // Persistir
                 $this->repository->update($entity);
@@ -115,7 +123,7 @@ class CustomerUpdateAction
             'headerDescription' => 'Cadastro',
             'contentTitle' => 'Editar Contato',
             'customer' => $customer,
-            'myForm' => $form,
+            'myForm' => $this->form,
         ];
 
         return new HtmlResponse($this->template->render('app::customer/update', $data));

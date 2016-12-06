@@ -19,10 +19,16 @@ class CustomerDeleteAction
      * @var CustomerRepositoryInterface
      */
     private $repository;
+
     /**
      * @var null|Template\TemplateRendererInterface
      */
     private $template;
+
+    /**
+     * @var CustomerForm
+     */
+    private $form;
 
 
     /**
@@ -32,10 +38,12 @@ class CustomerDeleteAction
      */
     public function __construct(
         CustomerRepositoryInterface $repository,
-        Template\TemplateRendererInterface $template = null
+        Template\TemplateRendererInterface $template = null,
+        CustomerForm $form = null
     ) {
         $this->repository = $repository;
         $this->template = $template;
+        $this->form = $form;
     }
 
     /**
@@ -54,10 +62,11 @@ class CustomerDeleteAction
         $id = $request->getAttribute('id');
         $customer = $this->repository->find($id);
 
-        // Form
-        $form = new CustomerForm();
-        $form->add(new HttpMethodElement('DELETE'));
-        $form->bind($customer);
+        // Method Spof
+        $this->form->add(new HttpMethodElement('DELETE'));
+
+        // Setando dados
+        $this->form->bind($customer);
 
         // Verificar se foi passado DELETE (spoof)
         if ($request->getMethod() == 'DELETE') {
@@ -79,7 +88,7 @@ class CustomerDeleteAction
             'headerDescription' => 'Exclusão',
             'contentTitle' => 'Apagar Contato',
             'customer' => $customer,
-            'myForm' => $form,
+            'myForm' => $this->form,
         ];
 
         return new HtmlResponse($this->template->render('app::customer/delete', $data));

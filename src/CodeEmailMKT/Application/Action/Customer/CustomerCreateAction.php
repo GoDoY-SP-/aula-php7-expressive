@@ -20,10 +20,16 @@ class CustomerCreateAction
      * @var CustomerRepositoryInterface
      */
     private $repository;
+
     /**
      * @var null|Template\TemplateRendererInterface
      */
     private $template;
+
+    /**
+     * @var CustomerForm
+     */
+    private $form;
 
 
     /**
@@ -33,10 +39,12 @@ class CustomerCreateAction
      */
     public function __construct(
         CustomerRepositoryInterface $repository,
-        Template\TemplateRendererInterface $template = null
+        Template\TemplateRendererInterface $template = null,
+        CustomerForm $form = null
     ) {
         $this->repository = $repository;
         $this->template = $template;
+        $this->form = $form;
     }
 
     /**
@@ -51,9 +59,8 @@ class CustomerCreateAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        // Form
-        $form = new CustomerForm();
-        $form->add(new HttpMethodElement('POST'));
+        // Method Spof
+        $this->form->add(new HttpMethodElement('POST'));
 
         // Verificar se foi passado $_POST
         if ($request->getMethod() == 'POST') {
@@ -64,12 +71,12 @@ class CustomerCreateAction
             $data = $request->getParsedBody();
 
             // Setar dados no formulário
-            $form->setData($data);
+            $this->form->setData($data);
 
             // Validar formulário
-            if ($form->isValid()) {
+            if ($this->form->isValid()) {
                 // Hidratar entidade
-                $entity = $form->getData();
+                $entity = $this->form->getData();
 
                 // Persistir
                 $this->repository->create($entity);
@@ -86,7 +93,7 @@ class CustomerCreateAction
             'headerTitle' => 'Contatos',
             'headerDescription' => 'Cadastro',
             'contentTitle' => 'Novo Contato',
-            'myForm' => $form,
+            'myForm' => $this->form,
         ];
 
         return new HtmlResponse($this->template->render('app::customer/create', $data));
