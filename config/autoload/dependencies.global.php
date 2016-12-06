@@ -22,6 +22,7 @@ return [
             Aura\Session\Session::class => DaMess\Factory\AuraSessionFactory::class,
             CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface::class => CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory::class,
             CodeEmailMKT\Domain\Service\FlashMessageInterface::class => CodeEmailMKT\Infrastructure\Service\FlashMessageFactory::class,
+            'doctrine:fixtures_cmd:load' => \CodeEdu\FixtureFactory::class,
         ],
         // Use 'aliases'
         'aliases' => [
