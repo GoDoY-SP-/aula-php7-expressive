@@ -124,7 +124,6 @@ class AuthenticationStorage implements StorageInterface, AuthenticationStorageIn
      */
     public function clear()
     {
-        // die('CLEAR');
-        // $this->segment->clear();
+        $this->segment->clear();
     }
 }
