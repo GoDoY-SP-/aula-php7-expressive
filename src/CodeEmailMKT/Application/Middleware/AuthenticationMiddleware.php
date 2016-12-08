@@ -35,9 +35,8 @@ class AuthenticationMiddleware
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-
         // Validar autenticação
-        if (! $this->authService->isAuth()) {
+        if (!$this->authService->isAuth()) {
 
             /** @var FlashMessageServiceInterface $flashMessage */
             $flashMessage = $request->getAttribute('flashMessage');

@@ -2,8 +2,6 @@
 
 namespace CodeEmailMKT\Infrastructure\Service;
 
-use Aura\Session\Segment;
-use Aura\Session\Session;
 use CodeEmailMKT\Domain\Service\FlashMessageServiceInterface;
 use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
@@ -36,16 +34,16 @@ class FlashMessageService implements FlashMessageServiceInterface
     {
         // Setar mensagem
         switch ($key) {
-            case FlashMessenger::NAMESPACE_ERROR:
+            case FlashMessageServiceInterface::NAMESPACE_ERROR:
                 $this->flashMessenger->addErrorMessage($value);
                 break;
-            case FlashMessenger::NAMESPACE_SUCCESS:
+            case FlashMessageServiceInterface::NAMESPACE_SUCCESS:
                 $this->flashMessenger->addSuccessMessage($value);
                 break;
-            case FlashMessenger::NAMESPACE_INFO:
+            case FlashMessageServiceInterface::NAMESPACE_INFO:
                 $this->flashMessenger->addInfoMessage($value);
                 break;
-            case FlashMessenger::NAMESPACE_WARNING:
+            case FlashMessageServiceInterface::NAMESPACE_WARNING:
                 $this->flashMessenger->addWarningMessage($value);
                 break;
             default:
@@ -63,16 +61,16 @@ class FlashMessageService implements FlashMessageServiceInterface
         // Retornar mensagem
         $result = [];
         switch ($key) {
-            case FlashMessenger::NAMESPACE_ERROR:
+            case FlashMessageServiceInterface::NAMESPACE_ERROR:
                 $result = $this->flashMessenger->getCurrentErrorMessages();
                 break;
-            case FlashMessenger::NAMESPACE_SUCCESS:
+            case FlashMessageServiceInterface::NAMESPACE_SUCCESS:
                 $result = $this->flashMessenger->getCurrentSuccessMessages();
                 break;
-            case FlashMessenger::NAMESPACE_INFO:
+            case FlashMessageServiceInterface::NAMESPACE_INFO:
                 $result = $this->flashMessenger->getCurrentInfoMessages();
                 break;
-            case FlashMessenger::NAMESPACE_WARNING:
+            case FlashMessageServiceInterface::NAMESPACE_WARNING:
                 $result = $this->flashMessenger->getCurrentWarningMessages();
                 break;
             default:

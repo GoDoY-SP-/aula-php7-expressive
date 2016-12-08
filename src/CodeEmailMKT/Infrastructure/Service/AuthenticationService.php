@@ -1,17 +1,11 @@
 <?php
 namespace CodeEmailMKT\Infrastructure\Service;
 
-use Aura\Session\Session;
 use CodeEmailMKT\Domain\Service\AuthenticationServiceInterface;
 use Zend\Authentication\Adapter\ValidatableAdapterInterface;
 
 class AuthenticationService implements AuthenticationServiceInterface
 {
-    /**
-     * @var Session
-     */
-    private $session;
-
     /**
      * @var \Zend\Authentication\AuthenticationService
      */
@@ -19,14 +13,11 @@ class AuthenticationService implements AuthenticationServiceInterface
 
     /**
      * AuthenticationService constructor.
-     * @param Session                                    $session
      * @param \Zend\Authentication\AuthenticationService $authService
      */
     public function __construct(
-        Session $session,
         \Zend\Authentication\AuthenticationService $authService
     ) {
-        $this->session = $session;
         $this->authService = $authService;
     }
 
@@ -48,11 +39,13 @@ class AuthenticationService implements AuthenticationServiceInterface
 
     public function isAuth()
     {
+        // Verificar usuário autenticado
         return $this->getUser() != null;
     }
 
     public function getUser()
     {
+        // Usuário autenticado
         return $this->authService->getIdentity();
     }
 

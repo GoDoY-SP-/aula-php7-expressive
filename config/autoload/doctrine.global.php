@@ -50,11 +50,14 @@ return [
                 ]
             ]
         ],
-//        'annotations' => [
+        'annotations' => [
 //            'paths' => [
 ////                'App/src/Entity',
 //            ]
-//        ]
+        ],
+        'fixtures' => [
+            'MyFixture' => __DIR__ . '/../../src/CodeEmailMKT/Infrastructure/Persistence/Doctrine/DataFixture'
+        ],
         'authentication' => [
             'orm_default' => [
                 'object_manager' => Doctrine\ORM\EntityManager::class,

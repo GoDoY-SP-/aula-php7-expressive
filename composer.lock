@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e8a4a1fc98151f9bd9ed73551c741374",
-    "content-hash": "2a18bd3c68aa0acfb040b7627a89de1f",
+    "hash": "e9bf824f644b59852836e23914d5e35b",
+    "content-hash": "9f4681e4a59a2168054293461e97f409",
     "packages": [
         {
             "name": "aura/router",
@@ -60,68 +60,6 @@
                 "routing"
             ],
             "time": "2016-10-03 20:00:15"
-        },
-        {
-            "name": "aura/session",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Session.git",
-                "reference": "7d2f7d41ad693970b5b6b83facca0961d3378883"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Session/zipball/7d2f7d41ad693970b5b6b83facca0961d3378883",
-                "reference": "7d2f7d41ad693970b5b6b83facca0961d3378883",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "aura/di": "~2.0"
-            },
-            "suggest": {
-                "ext-mcrypt": "Mcrypt generates the next best secure CSRF tokens.",
-                "ext-openssl": "OpenSSL generates the best secure CSRF tokens.",
-                "ircmaxell/random-lib": "A Library For Generating Secure Random Numbers",
-                "paragonie/random_compat": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7"
-            },
-            "type": "library",
-            "extra": {
-                "aura": {
-                    "type": "library",
-                    "config": {
-                        "common": "Aura\\Session\\_Config\\Common"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aura\\Session\\": "src/",
-                    "Aura\\Session\\_Config\\": "config/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Aura.Session Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Session/contributors"
-                }
-            ],
-            "description": "Provides session management functionality, including lazy session starting, session segments, next-request-only (\"flash\") values, and CSRF tools.",
-            "homepage": "https://github.com/auraphp/Aura.Session",
-            "keywords": [
-                "csrf",
-                "flash",
-                "flash message",
-                "session",
-                "sessions"
-            ],
-            "time": "2016-10-03 20:28:32"
         },
         {
             "name": "codeedu/zendexpr-doctrine-fixture",
@@ -197,58 +135,6 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "time": "2014-12-30 15:22:37"
-        },
-        {
-            "name": "damess/expressive-session-middleware",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dannym87/expressive-session-middleware.git",
-                "reference": "92fef60ed8da572f907ed7f94d63b1965c7b89ee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dannym87/expressive-session-middleware/zipball/92fef60ed8da572f907ed7f94d63b1965c7b89ee",
-                "reference": "92fef60ed8da572f907ed7f94d63b1965c7b89ee",
-                "shasum": ""
-            },
-            "require": {
-                "aura/session": "^2.0",
-                "container-interop/container-interop": "^1.1",
-                "php": ">=5.5.0",
-                "psr/http-message": "^1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.*",
-                "scrutinizer/ocular": "~1.1",
-                "squizlabs/php_codesniffer": "^2.3",
-                "zendframework/zend-diactoros": "^1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "DaMess\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dan Messenger",
-                    "email": "dannym87@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Simple session middleware for Zend Expressive",
-            "keywords": [
-                "expressive",
-                "expressive-session-middleware",
-                "psr-7",
-                "zend"
-            ],
-            "time": "2016-06-28 12:35:07"
         },
         {
             "name": "doctrine/annotations",
