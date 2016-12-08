@@ -1,0 +1,68 @@
+{% extends '@layout/adminLTE-login.html.twig' %}
+
+{% block title %}SoN PHP7+DDD{% endblock %}
+{% block page_header %}{{ headerTitle }}{% endblock %}
+{% block page_header_description %}{{ headerDescription }}{% endblock %}
+
+{% block content %}
+    {% do myForm.setAttribute('action', url('authentication.login')) %}
+    {% do myForm.setAttribute('class', 'form-horizontal') %}
+    {% do myForm.setAttribute('role', 'form') %}
+
+    {% set formEmail = myForm.get('email') %}
+    {% do formEmail.setAttribute('class', 'form-control') %}
+    {% do formEmail.setAttribute('placeholder', 'Digite o e-mail') %}
+
+    {% set formPwd = myForm.get('passwordPlain') %}
+    {% do formPwd.setAttribute('class', 'form-control') %}
+    {% do formPwd.setAttribute('placeholder', 'Digite a senha') %}
+
+    {% set formSubmit = myForm.get('submit') %}
+    {% do formSubmit.setAttribute('class', 'btn btn-primary btn-block btn-flat') %}
+    {% do formSubmit.setLabel('Entrar') %}
+
+    <div class="login-box">
+        <div class="login-logo">
+            Code <b>E-mail MKT</b> - Login
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            {% include '@layout/_flashmessages.html.twig' with {flashMessages: (flashMessages is defined and flashMessages|length > 0) ? flashMessages } %}
+
+            <p class="login-box-msg">LOGIN</p>
+
+            {{ form().openTag(myForm) | raw }}
+            <fieldset class="col-xs-12">
+                {{ formHidden( myForm.get('_method') ) }}
+                {% set message = formElementErrors(formEmail, {class: 'help-block'}) %}
+                <div class="form-group has-feedback {{ message ? 'has-error' }}">
+                    {{ formElement(formEmail) }}
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    {{ message | raw }}
+                </div>
+                {% set message = formElementErrors(formPwd, {class: 'help-block'}) %}
+                <div class="form-group has-feedback {{ message ? 'has-error' }}">
+                    {{ formElement(formPwd) }}
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    {{ message | raw }}
+                </div>
+            </fieldset>
+            <div class="row">
+                <div class="col-xs-8"></div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    {{ formButton(myForm.get('submit')) }}
+                </div>
+                <!-- /.col -->
+            </div>
+            {{ form().closeTag() | raw }}
+
+            <hr>
+
+            <a href="#">Esqueceu a senha?</a><br>
+
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+    <!-- /.login-box -->
+{% endblock %}

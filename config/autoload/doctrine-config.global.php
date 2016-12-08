@@ -18,6 +18,10 @@ $doctrineModuleConfig = require_once $vendorPath . '/doctrine/doctrine-module/co
 $doctrineModuleConfig['dependencies'] = $doctrineModuleConfig['service_manager'];
 unset($doctrineModuleConfig['service_manager']);
 
+// Usar Storage Aura
+unset($doctrineModuleConfig['dependencies']['invokables']['DoctrineModule\Authentication\Storage\Session']);
+$doctrineModuleConfig['dependencies']['factories']['DoctrineModule\Authentication\Storage\Session'] = CodeEmailMKT\Infrastructure\Storage\AuthenticationStorageFactory::class;
+
 // Recriar doctrine.cli(comandos) para acessar serviços no Zend Expressive
 unset($doctrineModuleConfig['dependencies']['factories']['doctrine.cli']);
 $doctrineModuleConfig['dependencies']['factories']['doctrine.cli'] = function (

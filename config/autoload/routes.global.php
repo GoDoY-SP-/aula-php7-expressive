@@ -9,6 +9,8 @@ return [
         'factories' => [
             CodeEmailMKT\Application\Action\HomePageAction::class => CodeEmailMKT\Application\Action\HomePageFactory::class,
             CodeEmailMKT\Application\Action\TestePageAction::class => CodeEmailMKT\Application\Action\TestePageFactory::class,
+            CodeEmailMKT\Application\Action\Authentication\LoginPageAction::class => CodeEmailMKT\Application\Action\Authentication\Factory\LoginPageFactory::class,
+            CodeEmailMKT\Application\Action\Authentication\LogoutAction::class => CodeEmailMKT\Application\Action\Authentication\Factory\LogoutFactory::class,
             CodeEmailMKT\Application\Action\Customer\CustomerListAction::class => CodeEmailMKT\Application\Action\Customer\Factory\CustomerListFactory::class,
             CodeEmailMKT\Application\Action\Customer\CustomerCreateAction::class => CodeEmailMKT\Application\Action\Customer\Factory\CustomerCreateFactory::class,
             CodeEmailMKT\Application\Action\Customer\CustomerUpdateAction::class => CodeEmailMKT\Application\Action\Customer\Factory\CustomerUpdateFactory::class,
@@ -33,6 +35,18 @@ return [
             'name' => 'teste',
             'path' => '/teste',
             'middleware' => CodeEmailMKT\Application\Action\TestePageAction::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'authentication.login',
+            'path' => '/auth/login',
+            'middleware' => CodeEmailMKT\Application\Action\Authentication\LoginPageAction::class,
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'authentication.logout',
+            'path' => '/auth/logout',
+            'middleware' => CodeEmailMKT\Application\Action\Authentication\LogoutAction::class,
             'allowed_methods' => ['GET'],
         ],
         [

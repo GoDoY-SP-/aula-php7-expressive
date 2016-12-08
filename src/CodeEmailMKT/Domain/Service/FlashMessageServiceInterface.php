@@ -2,7 +2,7 @@
 
 namespace CodeEmailMKT\Domain\Service;
 
-interface FlashMessageInterface
+interface FlashMessageServiceInterface
 {
     /**
      * Default messages namespace

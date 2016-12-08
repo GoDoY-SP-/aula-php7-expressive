@@ -2,9 +2,9 @@
 
 namespace CodeEmailMKT\Infrastructure;
 
-use CodeEmailMKT\Domain\Service\BootstrapInterface;
+use CodeEmailMKT\Domain\Service\BootstrapServiceInterface;
 
-class Bootstrap implements BootstrapInterface
+class Bootstrap implements BootstrapServiceInterface
 {
 
     public function create()

@@ -5,7 +5,7 @@ namespace CodeEmailMKT\Application\Action\Customer;
 use CodeEmailMKT\Application\Form\CustomerForm;
 use CodeEmailMKT\Application\Form\HttpMethodElement;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
-use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use CodeEmailMKT\Domain\Service\FlashMessageServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -70,14 +70,14 @@ class CustomerDeleteAction
 
         // Verificar se foi passado DELETE (spoof)
         if ($request->getMethod() == 'DELETE') {
-            /** @var FlashMessageInterface $flashMessage */
+            /** @var FlashMessageServiceInterface $flashMessage */
             $flashMessage = $request->getAttribute('flashMessage');
 
             // Apagar
             $this->repository->remove($customer);
 
             // Setar mensagem de sucesso
-            $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro apagado com sucesso!');
+            $flashMessage->setMessage(FlashMessageServiceInterface::NAMESPACE_SUCCESS, 'Registro apagado com sucesso!');
 
             // Redirecionar para listagem
             return new RedirectResponse('/admin/customers');

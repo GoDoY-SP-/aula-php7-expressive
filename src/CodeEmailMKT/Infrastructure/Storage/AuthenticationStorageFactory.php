@@ -1,17 +1,16 @@
 <?php
-
-namespace CodeEmailMKT\Infrastructure\Service;
+namespace CodeEmailMKT\Infrastructure\Storage;
 
 use Aura\Session\Session;
 use Interop\Container\ContainerInterface;
 
-class FlashMessageFactory
+class AuthenticationStorageFactory
 {
     public function __invoke(ContainerInterface $container)
     {
         /** @var Session $session */
         $session = $container->get(Session::class);
 
-        return new FlashMessage($session);
+        return new AuthenticationStorage($session);
     }
 }

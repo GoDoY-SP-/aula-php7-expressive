@@ -2,8 +2,8 @@
 
 namespace CodeEmailMKT\Application\Middleware;
 
-use CodeEmailMKT\Domain\Service\BootstrapInterface;
-use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use CodeEmailMKT\Domain\Service\BootstrapServiceInterface;
+use CodeEmailMKT\Domain\Service\FlashMessageServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -11,11 +11,11 @@ class BootstrapMiddleware
 {
     private $bootstrap;
     /**
-     * @var FlashMessageInterface
+     * @var FlashMessageServiceInterface
      */
     private $flashMessage;
 
-    public function __construct(BootstrapInterface $bootstrap, FlashMessageInterface $flashMessage)
+    public function __construct(BootstrapServiceInterface $bootstrap, FlashMessageServiceInterface $flashMessage)
     {
         $this->bootstrap = $bootstrap;
         $this->flashMessage = $flashMessage;

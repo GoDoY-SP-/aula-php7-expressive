@@ -4,9 +4,9 @@ namespace CodeEmailMKT\Infrastructure\Service;
 
 use Aura\Session\Segment;
 use Aura\Session\Session;
-use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use CodeEmailMKT\Domain\Service\FlashMessageServiceInterface;
 
-class FlashMessage implements FlashMessageInterface
+class FlashMessageService implements FlashMessageServiceInterface
 {
 
     /**

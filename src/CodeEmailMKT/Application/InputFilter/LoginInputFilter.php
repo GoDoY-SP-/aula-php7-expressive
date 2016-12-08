@@ -2,24 +2,14 @@
 namespace CodeEmailMKT\Application\InputFilter;
 
 use Zend\Filter\StringTrim;
-use Zend\Filter\StripTags;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\EmailAddress;
 use Zend\Validator\NotEmpty;
 
-class CustomerInputFilter extends InputFilter
+class LoginInputFilter extends InputFilter
 {
     public function __construct()
     {
-        $this->add([
-            'name' => 'name',
-            'required' => false,
-            'filters' => [
-                ['name' => StringTrim::class],
-                ['name' => StripTags::class],
-            ]
-        ]);
-
         $this->add([
             'name' => 'email',
             'required' => true,
@@ -47,6 +37,21 @@ class CustomerInputFilter extends InputFilter
                         ]
                     ],
                 ]
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'passwordPlain',
+            'required' => true,
+            'validators' => [
+                [
+                    'name' => NotEmpty::class,
+                    'options' => [
+                        'messages' => [
+                            NotEmpty::IS_EMPTY => 'Este campo é requerido'
+                        ]
+                    ],
+                ],
             ]
         ]);
     }

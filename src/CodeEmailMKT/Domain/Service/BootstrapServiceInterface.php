@@ -2,7 +2,7 @@
 
 namespace CodeEmailMKT\Domain\Service;
 
-interface BootstrapInterface
+interface BootstrapServiceInterface
 {
     public function create();
 }

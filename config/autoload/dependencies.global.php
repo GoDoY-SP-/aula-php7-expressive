@@ -20,14 +20,20 @@ return [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
             Aura\Session\Session::class => DaMess\Factory\AuraSessionFactory::class,
-            CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface::class => CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory::class,
-            CodeEmailMKT\Domain\Service\FlashMessageInterface::class => CodeEmailMKT\Infrastructure\Service\FlashMessageFactory::class,
+            CodeEmailMKT\Domain\Service\FlashMessageServiceInterface::class => CodeEmailMKT\Infrastructure\Service\FlashMessageServiceFactory::class,
             'doctrine:fixtures_cmd:load' => \CodeEdu\FixtureFactory::class,
+            CodeEmailMKT\Domain\Service\AuthenticationServiceInterface::class => CodeEmailMKT\Infrastructure\Service\AuthenticationServiceFactory::class,
+            // Repository
+            CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface::class => CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\CustomerRepositoryFactory::class,
+            CodeEmailMKT\Domain\Persistence\UserRepositoryInterface::class => CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\UserRepositoryFactory::class,
+            // Storage
+            CodeEmailMKT\Domain\Storage\AuthenticationStorageInterface::class => CodeEmailMKT\Infrastructure\Storage\AuthenticationStorageFactory::class,
         ],
         // Use 'aliases'
         'aliases' => [
             'Configuration' => 'config', //Doctrine needs a service called Configuration
             'Config' => 'config', //Doctrine needs a service called Configuration
+            Zend\Authentication\AuthenticationService::class => 'doctrine.authenticationservice.orm_default'
         ],
     ],
 ];

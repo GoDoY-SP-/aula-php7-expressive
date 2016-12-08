@@ -2,9 +2,8 @@
 
 namespace CodeEmailMKT\Application\Action\Customer;
 
-use CodeEmailMKT\Domain\Entity\CustomerEntity;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
-use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use CodeEmailMKT\Domain\Service\FlashMessageServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -49,7 +48,7 @@ class CustomerListAction
         callable $next = null
     ) {
         // FlashMessage
-        $flashMessages[FlashMessageInterface::NAMESPACE_SUCCESS] = $request->getAttribute('flashMessage')->getMessage(FlashMessageInterface::NAMESPACE_SUCCESS);
+        $flashMessages[FlashMessageServiceInterface::NAMESPACE_SUCCESS] = $request->getAttribute('flashMessage')->getMessage(FlashMessageServiceInterface::NAMESPACE_SUCCESS);
 
         // Carregar clientes para view
         $costumers = $this->repository->findAll();

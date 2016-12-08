@@ -55,5 +55,16 @@ return [
 ////                'App/src/Entity',
 //            ]
 //        ]
+        'authentication' => [
+            'orm_default' => [
+                'object_manager' => Doctrine\ORM\EntityManager::class,
+                'identity_class' => CodeEmailMKT\Domain\Entity\UserEntity::class,
+                'identity_property' => 'email',
+                'credential_property' => 'password',
+                'credential_callable' => function (\CodeEmailMKT\Domain\Entity\UserEntity $userEntity, $passwordGiven) {
+                    return password_verify($passwordGiven, $userEntity->getPassword());
+                }
+            ]
+        ]
     ],
 ];

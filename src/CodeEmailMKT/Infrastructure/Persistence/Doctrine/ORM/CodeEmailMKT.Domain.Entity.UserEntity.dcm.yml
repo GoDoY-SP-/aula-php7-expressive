@@ -1,0 +1,40 @@
+#CodeEmailMKT.Domain.Entity.UserEntity.dcm.yml
+CodeEmailMKT\Domain\Entity\UserEntity:
+    type: entity
+    repositoryClass: CodeEmailMKT\Infrastructure\Persistence\Doctrine\Repository\UserRepository
+    table: usuarios
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: usr_id
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: usr_nome
+        email:
+            type: string
+            nullable: false
+            length: 100
+            unique: true
+            options:
+                fixed: false
+            column: usr_email
+        password:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false
+            column: usr_senha
+    lifecycleCallbacks:
+        prePersist: [generatePassword]

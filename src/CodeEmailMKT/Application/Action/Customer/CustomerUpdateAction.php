@@ -5,7 +5,7 @@ namespace CodeEmailMKT\Application\Action\Customer;
 use CodeEmailMKT\Application\Form\CustomerForm;
 use CodeEmailMKT\Application\Form\HttpMethodElement;
 use CodeEmailMKT\Domain\Persistence\CustomerRepositoryInterface;
-use CodeEmailMKT\Domain\Service\FlashMessageInterface;
+use CodeEmailMKT\Domain\Service\FlashMessageServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -70,7 +70,7 @@ class CustomerUpdateAction
 
         // Verificar se foi passado PUT (spoof)
         if ($request->getMethod() == 'PUT') {
-            /** @var FlashMessageInterface $flashMessage */
+            /** @var FlashMessageServiceInterface $flashMessage */
             $flashMessage = $request->getAttribute('flashMessage');
 
             // Carregar dados do formulário
@@ -85,7 +85,7 @@ class CustomerUpdateAction
             $this->repository->update($customer);
 
             // Setar mensagem de sucesso
-            $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro atualizado com sucesso!');
+            $flashMessage->setMessage(FlashMessageServiceInterface::NAMESPACE_SUCCESS, 'Registro atualizado com sucesso!');
 
             // Redirecionar para listagem
             return new RedirectResponse('/admin/customers');
@@ -93,7 +93,7 @@ class CustomerUpdateAction
 
         // Verificar se foi passado PUT (spoof)
         if ($request->getMethod() == 'PUT') {
-            /** @var FlashMessageInterface $flashMessage */
+            /** @var FlashMessageServiceInterface $flashMessage */
             $flashMessage = $request->getAttribute('flashMessage');
 
             // Carregar dados do formulário
@@ -111,7 +111,7 @@ class CustomerUpdateAction
                 $this->repository->update($entity);
 
                 // Setar mensagem de sucesso
-                $flashMessage->setMessage(FlashMessageInterface::NAMESPACE_SUCCESS, 'Registro atualizado com sucesso!');
+                $flashMessage->setMessage(FlashMessageServiceInterface::NAMESPACE_SUCCESS, 'Registro atualizado com sucesso!');
 
                 // Redirecionar para listagem
                 return new RedirectResponse('/admin/customers');
