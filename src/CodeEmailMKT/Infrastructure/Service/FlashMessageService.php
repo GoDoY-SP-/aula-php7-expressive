@@ -5,32 +5,28 @@ namespace CodeEmailMKT\Infrastructure\Service;
 use Aura\Session\Segment;
 use Aura\Session\Session;
 use CodeEmailMKT\Domain\Service\FlashMessageServiceInterface;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
 class FlashMessageService implements FlashMessageServiceInterface
 {
+    /**
+     * @var FlashMessenger
+     */
+    private $flashMessenger;
 
     /**
-     * @var Session
+     * FlashMessageService constructor.
+     * @param FlashMessenger $flashMessenger
      */
-    private $session;
-
-    /**
-     * @var Segment
-     */
-    private $segment;
-
-    public function __construct(Session $session)
+    public function __construct(FlashMessenger $flashMessenger)
     {
-        $this->session = $session;
-        if (!$this->session->isStarted()) {
-            $this->session->start();
-        }
+
+        $this->flashMessenger = $flashMessenger;
     }
 
     public function setNamespace($name = __NAMESPACE__)
     {
-        // Setar segmento
-        $this->segment = $this->session->getSegment($name);
+        $this->flashMessenger->setNamespace($name);
 
         // Retornar FlashMessage
         return $this;
@@ -38,13 +34,24 @@ class FlashMessageService implements FlashMessageServiceInterface
 
     public function setMessage($key, $value)
     {
-        // Verificar se o segmento existe
-        if (!$this->segment) {
-            $this->setNamespace();
-        }
-
         // Setar mensagem
-        $this->segment->setFlash($key, $value);
+        switch ($key) {
+            case FlashMessenger::NAMESPACE_ERROR:
+                $this->flashMessenger->addErrorMessage($value);
+                break;
+            case FlashMessenger::NAMESPACE_SUCCESS:
+                $this->flashMessenger->addSuccessMessage($value);
+                break;
+            case FlashMessenger::NAMESPACE_INFO:
+                $this->flashMessenger->addInfoMessage($value);
+                break;
+            case FlashMessenger::NAMESPACE_WARNING:
+                $this->flashMessenger->addWarningMessage($value);
+                break;
+            default:
+                $this->flashMessenger->addMessage($value);
+                break;
+        }
 
         // Retornar FlashMessage
         return $this;
@@ -52,12 +59,27 @@ class FlashMessageService implements FlashMessageServiceInterface
 
     public function getMessage($key)
     {
-        // Verificar se o segmento existe
-        if (!$this->segment) {
-            $this->setNamespace();
-        }
 
         // Retornar mensagem
-        return $this->segment->getFlash($key);
+        $result = [];
+        switch ($key) {
+            case FlashMessenger::NAMESPACE_ERROR:
+                $result = $this->flashMessenger->getCurrentErrorMessages();
+                break;
+            case FlashMessenger::NAMESPACE_SUCCESS:
+                $result = $this->flashMessenger->getCurrentSuccessMessages();
+                break;
+            case FlashMessenger::NAMESPACE_INFO:
+                $result = $this->flashMessenger->getCurrentInfoMessages();
+                break;
+            case FlashMessenger::NAMESPACE_WARNING:
+                $result = $this->flashMessenger->getCurrentWarningMessages();
+                break;
+            default:
+                $result = $this->flashMessenger->getCurrentMessages();
+                break;
+
+        }
+        return count($result) ? $result[0] : null;
     }
 }

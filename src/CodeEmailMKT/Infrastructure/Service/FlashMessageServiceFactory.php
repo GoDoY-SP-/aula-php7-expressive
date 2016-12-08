@@ -2,16 +2,16 @@
 
 namespace CodeEmailMKT\Infrastructure\Service;
 
-use Aura\Session\Session;
 use Interop\Container\ContainerInterface;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
 class FlashMessageServiceFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        /** @var Session $session */
-        $session = $container->get(Session::class);
+        /** @var FlashMessenger $flashMessenger */
+        $flashMessenger = new FlashMessenger();
 
-        return new FlashMessageService($session);
+        return new FlashMessageService($flashMessenger);
     }
 }
